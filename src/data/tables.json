@@ -1,0 +1,12 @@
+[
+  { "id": "t1", "number": 1, "seats": 2, "status": "available", "assignedWaiter": "u3" },
+  { "id": "t2", "number": 2, "seats": 4, "status": "available", "assignedWaiter": "u3" },
+  { "id": "t3", "number": 3, "seats": 4, "status": "occupied", "assignedWaiter": "u3", "currentOrderId": "o1" },
+  { "id": "t4", "number": 4, "seats": 6, "status": "available", "assignedWaiter": "u4" },
+  { "id": "t5", "number": 5, "seats": 4, "status": "occupied", "assignedWaiter": "u4", "currentOrderId": "o5" },
+  { "id": "t6", "number": 6, "seats": 2, "status": "reserved", "assignedWaiter": "u4" },
+  { "id": "t7", "number": 7, "seats": 4, "status": "occupied", "assignedWaiter": "u3", "currentOrderId": "o2" },
+  { "id": "t8", "number": 8, "seats": 8, "status": "available", "assignedWaiter": "u3" },
+  { "id": "t9", "number": 9, "seats": 2, "status": "available", "assignedWaiter": "u4" },
+  { "id": "t10", "number": 10, "seats": 6, "status": "reserved", "assignedWaiter": "u4" }
+]

@@ -1,0 +1,85 @@
+[
+  {
+    "id": "r1",
+    "customerName": "Karthik S",
+    "rating": 5,
+    "comment": "Best chocolate café in Tirupur! The Belgian Dark Hot Chocolate is absolutely divine.",
+    "date": "2026-03-04",
+    "highlighted": true,
+    "avatar": "KS"
+  },
+  {
+    "id": "r2",
+    "customerName": "Meera R",
+    "rating": 4,
+    "comment": "Loved the ambiance and the Death by Chocolate cake was amazing. Will visit again!",
+    "date": "2026-03-03",
+    "avatar": "MR"
+  },
+  {
+    "id": "r3",
+    "customerName": "Suresh V",
+    "rating": 5,
+    "comment": "The fondue experience was phenomenal. Perfect for a family outing. Highly recommended!",
+    "date": "2026-03-02",
+    "highlighted": true,
+    "avatar": "SV"
+  },
+  {
+    "id": "r4",
+    "customerName": "Anitha P",
+    "rating": 3,
+    "comment": "Food was good but the waiting time was a bit long. Service could improve.",
+    "date": "2026-03-01",
+    "avatar": "AP"
+  },
+  {
+    "id": "r5",
+    "customerName": "Vikram K",
+    "rating": 5,
+    "comment": "Hands down the best waffles I have ever had. The chocolate sauce is heavenly!",
+    "date": "2026-02-28",
+    "avatar": "VK"
+  },
+  {
+    "id": "r6",
+    "customerName": "Lakshmi N",
+    "rating": 4,
+    "comment": "Great place for chocolate lovers. The truffle collection box makes a perfect gift.",
+    "date": "2026-02-27",
+    "avatar": "LN"
+  },
+  {
+    "id": "r7",
+    "customerName": "Ramesh B",
+    "rating": 2,
+    "comment": "Portions could be bigger for the price. Taste was okay but not exceptional.",
+    "date": "2026-02-26",
+    "avatar": "RB"
+  },
+  {
+    "id": "r8",
+    "customerName": "Priyanka D",
+    "rating": 5,
+    "comment": "The lava cake with ice cream is a must-try! Beautiful café décor too.",
+    "date": "2026-02-25",
+    "avatar": "PD"
+  },
+  {
+    "id": "r9",
+    "customerName": "Dhanalakshmi S",
+    "rating": 4,
+    "comment": "Wonderful desserts and the staff is very friendly. My kids loved the churros!",
+    "date": "2026-02-24",
+    "avatar": "DS"
+  },
+  {
+    "id": "r10",
+    "customerName": "Ganesh M",
+    "rating": 5,
+    "comment": "Authentic Belgian chocolate experience right here in Tirupur. Outstanding quality!",
+    "date": "2026-02-23",
+    "highlighted": true,
+    "avatar": "GM"
+  }
+]
