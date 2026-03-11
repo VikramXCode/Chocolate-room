@@ -14,11 +14,11 @@ export default function LandingPage() {
   return (
     <>
       <HeroSection />
+      <AboutSection />
       <CategoriesSection />
       <FeaturedSection />
       <HowItWorksSection />
       <TestimonialsSection />
-      <AboutSection />
       <CTABanner />
     </>
   );
