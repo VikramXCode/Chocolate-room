@@ -35,7 +35,7 @@ export default function HeroSection() {
     <motion.section
       ref={heroRef}
       style={{ opacity: heroOpacity, scale: heroScale }}
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-16 pb-10 sm:py-16 text-center"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
     >
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950 via-espresso to-chocolate-950" />
@@ -44,7 +44,7 @@ export default function HeroSection() {
       <div className="animate-float pointer-events-none absolute right-[10%] bottom-[20%] h-72 w-72 rounded-full bg-chocolate-700/20 blur-3xl" style={{ animationDelay: '2s' }} />
       <div className="animate-float pointer-events-none absolute right-[30%] top-[12%] h-40 w-40 rounded-full bg-gold-300/[0.04] blur-2xl" style={{ animationDelay: '4s' }} />
 
-      <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10 flex flex-col items-center max-w-5xl w-full my-auto">
+      <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10 flex flex-col items-center max-w-5xl w-full">
         {/* Pre-title */}
         <motion.div variants={fadeUp} custom={0} className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-gold-400/20 bg-gold-400/[0.06] px-5 py-2 sm:px-5 sm:py-2">
           <Sparkles size={16} className="sm:w-3.5 sm:h-3.5 text-gold-400" />
