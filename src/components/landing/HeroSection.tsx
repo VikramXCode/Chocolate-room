@@ -35,7 +35,7 @@ export default function HeroSection() {
     <motion.section
       ref={heroRef}
       style={{ opacity: heroOpacity, scale: heroScale }}
-      className="relative flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
+      className="relative flex sm:min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
     >
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950 via-espresso to-chocolate-950" />
