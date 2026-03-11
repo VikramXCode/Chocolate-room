@@ -23,6 +23,7 @@ import {
   UtensilsCrossed,
   MapPin,
   Star,
+  Loader2,
 } from "lucide-react";
 import { callWaiter } from "../../lib/api";
 import type { LucideIcon } from "lucide-react";
