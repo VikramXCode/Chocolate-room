@@ -14,14 +14,12 @@ export default function LandingPage() {
   return (
     <>
       <HeroSection />
-      <div className="relative z-10">
-        <CategoriesSection />
-        <FeaturedSection />
-        <HowItWorksSection />
-        <TestimonialsSection />
-        <AboutSection />
-        <CTABanner />
-      </div>
+      <CategoriesSection />
+      <FeaturedSection />
+      <HowItWorksSection />
+      <TestimonialsSection />
+      <AboutSection />
+      <CTABanner />
     </>
   );
 }

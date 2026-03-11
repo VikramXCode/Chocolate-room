@@ -1,6 +1,5 @@
-import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { ChevronDown, ArrowRight, Sparkles } from 'lucide-react';
 
 const fadeUp = {
@@ -23,18 +22,10 @@ const stats = [
 
 export default function HeroSection() {
   const navigate = useNavigate();
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ['start start', 'end start'],
-  });
-  const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
 
   return (
     <motion.section
-      ref={heroRef}
-      style={{ opacity: heroOpacity }}
-      className="sticky top-0 z-0 relative flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
     >
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950 via-espresso to-chocolate-950" />
