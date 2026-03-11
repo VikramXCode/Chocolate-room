@@ -29,12 +29,11 @@ export default function HeroSection() {
     offset: ['start start', 'end start'],
   });
   const heroOpacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   return (
     <motion.section
       ref={heroRef}
-      style={{ opacity: heroOpacity, scale: heroScale }}
+      style={{ opacity: heroOpacity }}
       className="sticky top-0 z-0 relative flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
     >
       {/* Background layers */}

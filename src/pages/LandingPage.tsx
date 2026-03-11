@@ -15,11 +15,11 @@ export default function LandingPage() {
     <>
       <HeroSection />
       <div className="relative z-10">
-        <AboutSection />
         <CategoriesSection />
         <FeaturedSection />
         <HowItWorksSection />
         <TestimonialsSection />
+        <AboutSection />
         <CTABanner />
       </div>
     </>
