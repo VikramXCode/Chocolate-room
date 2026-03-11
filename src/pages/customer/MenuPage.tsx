@@ -18,8 +18,11 @@ import {
   ChevronDown,
   Bell,
   Check,
-  Loader2,
   ChevronRight,
+  QrCode,
+  UtensilsCrossed,
+  MapPin,
+  Star,
 } from "lucide-react";
 import { callWaiter } from "../../lib/api";
 import type { LucideIcon } from "lucide-react";
@@ -27,7 +30,21 @@ import { useMenuStore } from "../../state/menuStore";
 import { useCartStore } from "../../state/cartStore";
 import ItemDetailModal from "../../components/ItemDetailModal";
 import QuantitySelector from "../../components/QuantitySelector";
+import ReviewCard from "../../components/ReviewCard";
 import type { MenuItem, MenuCategory } from "../../types/menu.types";
+import type { Review } from "../../types/review.types";
+import reviewsData from "../../data/reviews.json";
+
+/* ── static data ── */
+const topReviews: Review[] = (reviewsData as Review[])
+  .filter((r) => r.rating >= 4)
+  .slice(0, 3);
+
+const howItWorks = [
+  { icon: QrCode, title: 'Scan or Browse', desc: 'Scan the table QR or browse directly on your phone' },
+  { icon: ShoppingCart, title: 'Add & Order', desc: 'Pick your favourites and place your order in seconds' },
+  { icon: UtensilsCrossed, title: 'Sit Back & Enjoy', desc: 'Your order arrives fresh — no waiting in queues' },
+];
 
 /* ── constants ── */
 const CATEGORY_ORDER: MenuCategory[] = [
@@ -505,6 +522,87 @@ export default function MenuPage() {
           </div>
         )}
       </main>
+
+      {/* ══════════════════════════════════════════
+           Below-menu sections (mobile-first)
+         ══════════════════════════════════════════ */}
+
+      {/* ── How It Works ── */}
+      <section className="mx-auto w-full max-w-2xl px-4 pt-4 pb-8">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="h-px flex-1 bg-chocolate-800/60" />
+          <h2 className="font-display text-base text-gold-300 uppercase tracking-widest shrink-0">How It Works</h2>
+          <div className="h-px flex-1 bg-chocolate-800/60" />
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {howItWorks.map((step, i) => (
+            <div key={step.title} className="glass rounded-xl p-3 flex flex-col items-center text-center gap-2">
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gold-400/15">
+                <step.icon size={18} className="text-gold-300" />
+                <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold-400 text-[10px] font-bold text-espresso">
+                  {i + 1}
+                </span>
+              </div>
+              <p className="text-xs font-semibold text-cream leading-tight">{step.title}</p>
+              <p className="text-[11px] text-chocolate-400 leading-snug hidden sm:block">{step.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Customer Reviews ── */}
+      <section className="mx-auto w-full max-w-2xl px-4 pb-8">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            <Star size={16} className="fill-gold-400 text-gold-400" />
+            <h2 className="font-display text-lg text-cream">What Customers Say</h2>
+          </div>
+          <span className="text-xs text-chocolate-400">4.8 · 500+ orders</span>
+        </div>
+
+        {/* Horizontally scrollable on mobile, stacked on larger screens */}
+        <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory sm:grid sm:grid-cols-1 sm:overflow-visible">
+          {topReviews.map((review) => (
+            <div key={review.id} className="min-w-[80vw] max-w-xs sm:min-w-0 sm:max-w-none snap-start shrink-0">
+              <ReviewCard review={review} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Visit Us CTA ── */}
+      <section className="mx-auto w-full max-w-2xl px-4 pb-6">
+        <div className="glass rounded-2xl border border-gold-400/10 overflow-hidden">
+          {/* Map embed */}
+          <div className="w-full aspect-video">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250557.9990247434!2d77.0705938339233!3d11.115706470450322!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba907424abbadb5%3A0xc352e7daa4a901ba!2sThe%20Chocolate%20Room%20-%20Tirupur!5e0!3m2!1sen!2sin!4v1773078226544!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0, display: 'block' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="The Chocolate Room - Tirupur location"
+            />
+          </div>
+          {/* Footer */}
+          <div className="p-4 flex items-center justify-between gap-3">
+            <div>
+              <p className="font-display text-sm font-semibold text-cream">The Chocolate Room</p>
+              <p className="text-xs text-chocolate-400">Tirupur, Tamil Nadu</p>
+            </div>
+            <a
+              href="https://maps.google.com/?q=The+Chocolate+Room+Tirupur"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-gold-400/40 px-4 py-2 text-xs font-semibold text-gold-300 transition hover:bg-gold-400/10 active:scale-95 shrink-0"
+            >
+              <MapPin size={13} /> Get Directions
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* ── Floating cart button ── */}
       {count > 0 && (

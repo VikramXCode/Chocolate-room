@@ -32,7 +32,7 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-16 sm:py-20 md:py-28">
+    <section className="py-10 sm:py-14 md:py-20">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -46,7 +46,7 @@ export default function HowItWorksSection() {
           <div className="divider mx-auto mt-3 sm:mt-4 max-w-xs" />
         </motion.div>
 
-        <div className="relative mt-10 sm:mt-12 md:mt-16 grid gap-6 sm:gap-8 md:grid-cols-3 md:gap-6">
+        <div className="relative mt-6 sm:mt-8 md:mt-10 grid gap-5 sm:gap-6 md:grid-cols-3 md:gap-6">
           {/* Connecting line */}
           <div className="pointer-events-none absolute top-20 left-[16%] right-[16%] hidden h-px bg-gradient-to-r from-gold-400/0 via-gold-400/25 to-gold-400/0 md:block" />
 

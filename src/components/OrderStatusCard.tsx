@@ -7,6 +7,7 @@ import {
   Truck,
   UtensilsCrossed,
 } from 'lucide-react';
+// Clock is used for estimated time display
 
 import type { Order, OrderStatus, OrderType } from '../types/order.types';
 
@@ -204,31 +205,6 @@ export default function OrderStatusCard({ order }: OrderStatusCardProps) {
       {order.status === 'cancelled' && (
         <p className="my-2 text-sm font-medium text-red-400">This order has been cancelled.</p>
       )}
-
-      <div className="divider my-4" />
-
-      {/* ---- Items ---- */}
-      <div className="space-y-1.5">
-        {order.items.map((item) => (
-          <div key={item.menuItemId} className="flex items-center justify-between text-sm">
-            <span className="text-chocolate-200">
-              {item.name}{' '}
-              <span className="text-chocolate-400">&times; {item.quantity}</span>
-            </span>
-            <span className="font-medium text-chocolate-100">
-              ₹{item.price * item.quantity}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="divider my-4" />
-
-      {/* ---- Footer ---- */}
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-semibold text-cream">Total</span>
-        <span className="text-gradient text-lg font-bold">₹{order.total}</span>
-      </div>
 
       {order.estimatedTime != null && order.status !== 'served' && order.status !== 'delivered' && order.status !== 'cancelled' && (
         <div className="mt-3 flex items-center gap-1.5 text-xs text-chocolate-300">

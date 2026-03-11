@@ -26,7 +26,7 @@ export default function AboutSection() {
   const navigate = useNavigate();
 
   return (
-    <section id="about" className="relative overflow-hidden py-16 sm:py-20 md:py-28">
+    <section id="about" className="relative overflow-hidden py-10 sm:py-14 md:py-20">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950/50 via-transparent to-chocolate-950/50" />
       <motion.div
         initial="hidden"

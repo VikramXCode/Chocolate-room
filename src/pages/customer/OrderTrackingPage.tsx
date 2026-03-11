@@ -91,15 +91,13 @@ function formatTime(dateStr: string) {
 /* ------------------------------------------------------------------ */
 
 function PastOrderCard({ order }: { order: Order }) {
-  const itemCount = order.items.reduce((sum, i) => sum + i.quantity, 0);
-
   return (
     <motion.div variants={staggerItem}>
       <Link
         to={`/app/orders/${order.id}`}
-        className="glass rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5 group hover:ring-1 hover:ring-gold-400/20 transition-all"
+        className="glass rounded-2xl p-4 sm:p-5 flex items-center gap-3 group hover:ring-1 hover:ring-gold-400/20 transition-all"
       >
-        {/* Left: order info */}
+        {/* Order info */}
         <div className="flex-1 min-w-0 space-y-1">
           <div className="flex items-center gap-2 flex-wrap">
             <h3 className="text-sm font-semibold text-chocolate-100 truncate">
@@ -109,31 +107,16 @@ function PastOrderCard({ order }: { order: Order }) {
               {statusLabel[order.status]}
             </span>
           </div>
-
-          <div className="flex items-center gap-3 text-xs text-chocolate-400">
-            <span className="flex items-center gap-1">
-              <Clock size={12} />
-              {formatDate(order.createdAt)} · {formatTime(order.createdAt)}
-            </span>
+          <div className="flex items-center gap-1 text-xs text-chocolate-400">
+            <Clock size={12} />
+            {formatDate(order.createdAt)} · {formatTime(order.createdAt)}
           </div>
         </div>
 
-        {/* Right: summary */}
-        <div className="flex items-center gap-4 sm:gap-6">
-          <div className="text-right space-y-0.5">
-            <p className="text-xs text-chocolate-400">
-              {itemCount} item{itemCount !== 1 ? 's' : ''}
-            </p>
-            <p className="text-sm font-semibold text-gold-400">
-              ₹{order.total.toLocaleString('en-IN')}
-            </p>
-          </div>
-
-          <ChevronRight
-            size={18}
-            className="text-chocolate-500 group-hover:text-gold-400 transition-colors shrink-0"
-          />
-        </div>
+        <ChevronRight
+          size={18}
+          className="text-chocolate-500 group-hover:text-gold-400 transition-colors shrink-0"
+        />
       </Link>
     </motion.div>
   );

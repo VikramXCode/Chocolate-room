@@ -22,7 +22,7 @@ export default function FeaturedSection() {
   const navigate = useNavigate();
 
   return (
-    <section className="relative py-16 sm:py-20 md:py-28">
+    <section className="relative py-10 sm:py-14 md:py-20">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950/40 via-transparent to-chocolate-950/40" />
       <motion.div
         initial="hidden"
@@ -37,7 +37,7 @@ export default function FeaturedSection() {
           <div className="divider mx-auto mt-3 sm:mt-4 max-w-xs" />
         </motion.div>
 
-        <div className="mt-10 sm:mt-12 md:mt-16 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 sm:mt-8 md:mt-10 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((item, i) => (
             <motion.div
               key={item.id}
@@ -70,7 +70,7 @@ export default function FeaturedSection() {
           ))}
         </div>
 
-        <motion.div variants={fadeUp} className="mt-8 sm:mt-10 md:mt-12 text-center">
+        <motion.div variants={fadeUp} className="mt-5 sm:mt-7 md:mt-8 text-center">
           <button
             onClick={() => navigate('/app/menu')}
             className="group inline-flex items-center justify-center gap-2 rounded-full border border-gold-400/40 px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-semibold text-gold-300 transition hover:bg-gold-400/10 active:scale-95 w-full max-w-xs sm:w-auto"

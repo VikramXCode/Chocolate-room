@@ -24,7 +24,7 @@ export default function CategoriesSection() {
   const navigate = useNavigate();
 
   return (
-    <section id="menu" className="py-16 sm:py-20 md:py-28">
+    <section id="menu" className="py-10 sm:py-14 md:py-20">
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -38,7 +38,7 @@ export default function CategoriesSection() {
           <div className="divider mx-auto mt-3 sm:mt-4 max-w-xs" />
         </motion.div>
 
-        <div className="mt-10 sm:mt-12 md:mt-16 grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-4">
+        <div className="mt-6 sm:mt-8 md:mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-4">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.name}

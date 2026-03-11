@@ -7,7 +7,6 @@ import {
   X,
   User,
   LogIn,
-  Home,
   UtensilsCrossed,
   ClipboardList,
   Star,
@@ -280,6 +279,95 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
+
+      {/* ——— Mobile bottom navigation bar ——— */}
+      <nav className="fixed inset-x-0 bottom-0 z-50 flex items-stretch border-t border-chocolate-800/60 bg-chocolate-950/95 backdrop-blur-md md:hidden">
+        {/* Menu */}
+        <Link
+          to="/app/menu"
+          className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+            location.pathname === '/app/menu'
+              ? 'text-gold-400'
+              : 'text-chocolate-400 hover:text-gold-400'
+          }`}
+        >
+          <UtensilsCrossed className="h-5 w-5" />
+          Menu
+        </Link>
+
+        {/* Orders */}
+        <Link
+          to="/app/orders"
+          className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+            location.pathname.startsWith('/app/orders')
+              ? 'text-gold-400'
+              : 'text-chocolate-400 hover:text-gold-400'
+          }`}
+        >
+          <ClipboardList className="h-5 w-5" />
+          Orders
+        </Link>
+
+        {/* Cart */}
+        <button
+          onClick={openDrawer}
+          className={`relative flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+            location.pathname === '/app/cart'
+              ? 'text-gold-400'
+              : 'text-chocolate-400 hover:text-gold-400'
+          }`}
+        >
+          <span className="relative">
+            <ShoppingBag className="h-5 w-5" />
+            {itemCount > 0 && (
+              <motion.span
+                key={itemCount}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-gold-500 text-[9px] font-bold text-espresso"
+              >
+                {itemCount > 99 ? '99+' : itemCount}
+              </motion.span>
+            )}
+          </span>
+          Cart
+        </button>
+
+        {/* Reviews */}
+        <Link
+          to="/app/reviews"
+          className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+            location.pathname.startsWith('/app/reviews')
+              ? 'text-gold-400'
+              : 'text-chocolate-400 hover:text-gold-400'
+          }`}
+        >
+          <Star className="h-5 w-5" />
+          Reviews
+        </Link>
+
+        {/* Profile / Login */}
+        <Link
+          to={isLoggedIn ? '/app/profile' : '/login'}
+          className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+            location.pathname === '/app/profile'
+              ? 'text-gold-400'
+              : 'text-chocolate-400 hover:text-gold-400'
+          }`}
+        >
+          {isLoggedIn ? (
+            <>
+              <User className="h-5 w-5" />
+              Profile
+            </>
+          ) : (
+            <>
+              <LogIn className="h-5 w-5" />
+              Login
+            </>
+          )}
+        </Link>
+      </nav>
     </>
   );
 }

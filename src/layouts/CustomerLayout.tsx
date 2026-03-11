@@ -11,7 +11,7 @@ export default function CustomerLayout() {
   return (
     <div className="flex min-h-screen flex-col bg-espresso">
       <Navbar />
-      <main className="flex-1">
+      <main className="flex-1 pb-16 md:pb-0">
         <Outlet />
       </main>
       <Footer />

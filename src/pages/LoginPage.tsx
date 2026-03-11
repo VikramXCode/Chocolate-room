@@ -8,7 +8,7 @@ const roles: { role: UserRole; label: string; desc: string; icon: React.ReactNod
   { role: 'superadmin', label: 'Super Admin', desc: 'System settings & analytics', icon: <Shield size={26} />, path: '/dashboard/superadmin', gradient: 'from-violet-600 to-purple-900', ring: 'ring-violet-500/30' },
   { role: 'admin', label: 'Admin', desc: 'Products, orders & tables', icon: <UserCog size={26} />, path: '/dashboard/admin', gradient: 'from-sky-500 to-blue-900', ring: 'ring-sky-500/30' },
   { role: 'waiter', label: 'Waiter', desc: 'Tables, orders & alerts', icon: <ConciergeBell size={26} />, path: '/dashboard/waiter', gradient: 'from-emerald-500 to-green-900', ring: 'ring-emerald-500/30' },
-  { role: 'customer', label: 'Customer', desc: 'Browse & order', icon: <User size={26} />, path: '/dashboard', gradient: 'from-gold-400 to-gold-600', ring: 'ring-gold-400/30' },
+  { role: 'customer', label: 'Customer', desc: 'Browse & order', icon: <User size={26} />, path: '/app', gradient: 'from-gold-400 to-gold-600', ring: 'ring-gold-400/30' },
 ];
 
 export default function LoginPage() {
