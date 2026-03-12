@@ -25,7 +25,7 @@ export default function HeroSection() {
 
   return (
     <motion.section
-      className="relative flex min-h-[100dvh] flex-col items-center justify-start sm:justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-10 sm:py-16 text-center"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-between overflow-hidden px-4 sm:px-6 pt-20 pb-8 text-center"
     >
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950 via-espresso to-chocolate-950" />
@@ -34,6 +34,7 @@ export default function HeroSection() {
       <div className="animate-float pointer-events-none absolute right-[10%] bottom-[20%] h-72 w-72 rounded-full bg-chocolate-700/20 blur-3xl" style={{ animationDelay: '2s' }} />
       <div className="animate-float pointer-events-none absolute right-[30%] top-[12%] h-40 w-40 rounded-full bg-gold-300/[0.04] blur-2xl" style={{ animationDelay: '4s' }} />
 
+      {/* Main content — pushed to top by justify-between */}
       <motion.div initial="hidden" animate="visible" variants={stagger} className="relative z-10 flex flex-col items-center max-w-5xl w-full">
         {/* Pre-title */}
         <motion.div variants={fadeUp} custom={0} className="mb-4 sm:mb-6 inline-flex items-center gap-2 rounded-full border border-gold-400/20 bg-gold-400/[0.06] px-5 py-2 sm:px-5 sm:py-2">
@@ -86,14 +87,16 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        animate={{ y: [0, 12, 0] }}
-        transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' as const }}
-        className="absolute bottom-4 sm:bottom-8 z-10 text-chocolate-500"
-      >
-        <ChevronDown size={24} className="sm:w-7 sm:h-7" />
-      </motion.div>
+      {/* Scroll indicator — pinned to bottom by justify-between */}
+      <div className="relative z-10 flex flex-col items-center gap-1.5">
+        <span className="text-[10px] tracking-[0.2em] uppercase text-chocolate-600">Scroll to explore</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' as const }}
+        >
+          <ChevronDown size={22} className="text-chocolate-500" />
+        </motion.div>
+      </div>
     </motion.section>
   );
 }
