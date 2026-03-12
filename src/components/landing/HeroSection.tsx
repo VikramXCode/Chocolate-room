@@ -25,7 +25,7 @@ export default function HeroSection() {
 
   return (
     <motion.section
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-16 text-center"
+      className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-4 sm:px-6 pt-20 pb-16 text-center"
     >
       {/* Background layers */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950 via-espresso to-chocolate-950" />
