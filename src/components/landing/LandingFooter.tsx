@@ -4,21 +4,6 @@ import { Instagram, Facebook, Twitter, Phone, MapPin, Clock } from 'lucide-react
 export default function LandingFooter() {
   return (
     <footer id="contact" className="border-t border-gold-400/10 bg-chocolate-950">
-      {/* Embedded Map */}
-      <div className="w-full overflow-hidden border-b border-gold-400/10">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.968593548359!2d77.33167437504683!3d11.115716989054425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba907424abbadb5%3A0xc352e7daa4a901ba!2sThe%20Chocolate%20Room%20-%20Tirupur!5e0!3m2!1sen!2sin!4v1773294963700!5m2!1sen!2sin"
-          width="100%"
-          height="320"
-          style={{ border: 0, display: 'block' }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="The Chocolate Room – Tirupur location"
-          className="grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-        />
-      </div>
-
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16">
         <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
