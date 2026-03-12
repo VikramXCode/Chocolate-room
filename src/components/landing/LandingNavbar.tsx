@@ -31,9 +31,7 @@ export default function LandingNavbar() {
           scrolled ? 'glass-solid shadow-lg shadow-black/30' : ''
         }`}
       >
-        {!scrolled && (
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-espresso via-espresso/80 to-transparent" />
-        )}
+        <div className={`pointer-events-none absolute inset-0 bg-gradient-to-b from-espresso via-espresso/80 to-transparent transition-opacity duration-500 ${scrolled ? 'opacity-0' : 'opacity-100'}`} />
 
         <Link to="/" className="relative z-10 flex items-center gap-2">
           <span className="font-display text-base sm:text-lg md:text-xl text-gradient">The Chocolate Room</span>

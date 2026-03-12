@@ -1,6 +1,5 @@
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Clock, MapPin, ArrowRight } from 'lucide-react';
+import { Clock, MapPin } from 'lucide-react';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -14,7 +13,6 @@ const fadeUp = {
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 export default function AboutSection() {
-  const navigate = useNavigate();
 
   return (
     <section id="about" className="relative overflow-hidden py-10 sm:py-14 md:py-20">
@@ -70,15 +68,7 @@ export default function AboutSection() {
           </div>
         </motion.div>
 
-        <motion.button
-          variants={fadeUp}
-          custom={5}
-          onClick={() => navigate('/app/menu')}
-          className="group mt-8 sm:mt-10 inline-flex items-center justify-center gap-2 rounded-full bg-gold-400/10 px-8 py-3 text-sm font-semibold text-gold-300 ring-1 ring-gold-400/20 transition hover:bg-gold-400/20 active:scale-95"
-        >
-          Enter the Café
-          <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-        </motion.button>
+
       </motion.div>
     </section>
   );

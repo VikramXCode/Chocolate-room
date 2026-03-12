@@ -1,4 +1,6 @@
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 const scaleIn = {
   hidden: { opacity: 0, scale: 0.92 },
@@ -17,6 +19,8 @@ const fadeUp = {
 const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 export default function GallerySection() {
+  const navigate = useNavigate();
+
   return (
     <section className="relative overflow-hidden py-10 sm:py-14 md:py-20">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-chocolate-950/50 via-transparent to-chocolate-950/50" />
@@ -80,6 +84,17 @@ export default function GallerySection() {
             <p className="text-xl sm:text-2xl font-bold text-gold-300">4.8 ★</p>
             <p className="text-[10px] sm:text-xs text-chocolate-400">Customer Rating</p>
           </div>
+        </motion.div>
+
+        {/* Enter the Café CTA */}
+        <motion.div variants={fadeUp} className="mt-14 sm:mt-16 text-center">
+          <button
+            onClick={() => navigate('/app/menu')}
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-gold-400/10 px-8 py-3 text-sm font-semibold text-gold-300 ring-1 ring-gold-400/20 transition hover:bg-gold-400/20 active:scale-95"
+          >
+            Enter the Café
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+          </button>
         </motion.div>
       </motion.div>
     </section>
