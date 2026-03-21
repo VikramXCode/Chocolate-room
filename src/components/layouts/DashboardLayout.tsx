@@ -57,13 +57,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   if (!user) return null;
 
   const navItems = getNavItems(user.role);
+  const isAdmin = user.role === 'admin';
 
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
-  const roleLabel = user.role === 'superadmin' ? 'Super Admin' : user.role.charAt(0).toUpperCase() + user.role.slice(1);
+  const roleLabel =
+    user.role === 'superadmin'
+      ? 'Super Admin'
+      : user.role === 'admin'
+        ? 'rajasaab'
+        : user.role.charAt(0).toUpperCase() + user.role.slice(1);
 
   const SidebarContent = ({ mobile = false }: { mobile?: boolean }) => (
     <>
@@ -141,9 +147,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Top bar */}
         <header className="sticky top-0 z-40 glass-solid px-4 md:px-6 py-3 flex items-center justify-between border-b border-chocolate-800/30">
           <div className="flex items-center gap-3">
-            <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-chocolate-400 hover:text-gold-400 transition-colors duration-300">
-              <Menu size={22} />
-            </button>
+            {!isAdmin && (
+              <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-chocolate-400 hover:text-gold-400 transition-colors duration-300">
+                <Menu size={22} />
+              </button>
+            )}
             <div>
               <h1 className="text-sm font-semibold text-chocolate-200">{roleLabel} Dashboard</h1>
             </div>
@@ -160,12 +168,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         </header>
 
         {/* Content */}
-        <main className="p-4 md:p-6 lg:p-8">{children}</main>
+        <main className={`p-4 md:p-6 lg:p-8 ${isAdmin ? 'pb-24 md:pb-28 lg:pb-8' : ''}`}>{children}</main>
       </div>
 
       {/* Mobile sidebar overlay */}
       <AnimatePresence>
-        {sidebarOpen && (
+        {!isAdmin && sidebarOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50" onClick={() => setSidebarOpen(false)} />
             <motion.aside initial={{ x: -260 }} animate={{ x: 0 }} exit={{ x: -260 }} transition={{ type: 'tween', duration: 0.25 }} className="lg:hidden fixed left-0 top-0 h-full w-60 bg-chocolate-900 border-r border-chocolate-800/50 z-50 flex flex-col">
@@ -174,6 +182,30 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           </>
         )}
       </AnimatePresence>
+
+      {isAdmin && (
+        <nav className="lg:hidden fixed inset-x-0 bottom-0 z-50 flex items-stretch border-t border-chocolate-800/60 bg-chocolate-950/95 backdrop-blur-md">
+          {navItems.map((item) => {
+            const isRoot = item.to === '/dashboard/admin';
+            const active = isRoot ? pathname === item.to : pathname.startsWith(item.to);
+
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+                  active
+                    ? 'text-gold-400'
+                    : 'text-chocolate-400 hover:text-gold-400'
+                }`}
+              >
+                {item.icon}
+                <span className="truncate max-w-[56px]">{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      )}
     </div>
   );
 }

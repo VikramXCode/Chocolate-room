@@ -182,6 +182,16 @@ export default function ReviewsPage() {
     return copy;
   }, [reviews, sort]);
 
+  const handleRatingChange = useCallback((nextRating: number) => {
+    setFormError('');
+    setShowLowRatingPrompt(false);
+    setRating(nextRating);
+
+    if (nextRating >= 3) {
+      window.location.assign(GOOGLE_REVIEW_URL);
+    }
+  }, []);
+
   /* ── submit handler ──────────────────────────────────────────── */
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
@@ -324,7 +334,7 @@ export default function ReviewsPage() {
               <label className="mb-1.5 block text-sm text-chocolate-300">
                 Your Rating
               </label>
-              <InteractiveStars value={rating} onChange={setRating} />
+              <InteractiveStars value={rating} onChange={handleRatingChange} />
             </div>
 
             {rating >= 3 && (

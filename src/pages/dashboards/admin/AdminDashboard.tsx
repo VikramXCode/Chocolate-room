@@ -46,7 +46,7 @@ export default function AdminDashboard() {
     <div>
       {/* Page header */}
       <motion.div {...fadeUp} transition={{ duration: 0.5 }}>
-        <h2 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest">Admin</h2>
+        <h2 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest">rajasaab</h2>
         <p className="text-2xl font-display text-chocolate-100 mt-1">Dashboard Overview</p>
         <div className="w-12 h-0.5 bg-gradient-to-r from-gold-400/80 to-transparent mt-3" />
       </motion.div>

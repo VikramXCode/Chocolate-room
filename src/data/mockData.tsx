@@ -2,7 +2,7 @@ import type { MenuItem, Order, Review, Table, User, CafeSettings, WaiterNotifica
 
 export const mockUsers: User[] = [
   { id: 'u1', name: 'Rajesh Kumar', email: 'rajesh@chocolateroom.in', role: 'superadmin', avatar: '' },
-  { id: 'u2', name: 'Priya Sharma', email: 'priya@chocolateroom.in', role: 'admin', avatar: '' },
+  { id: 'u2', name: 'rajasaab', email: 'priya@chocolateroom.in', role: 'admin', avatar: '' },
   { id: 'u3', name: 'Arun M', email: 'arun@chocolateroom.in', role: 'waiter', avatar: '' },
   { id: 'u4', name: 'Deepa V', email: 'deepa@chocolateroom.in', role: 'waiter', avatar: '' },
   { id: 'u5', name: 'Guest User', email: 'guest@example.com', role: 'customer', avatar: '' },
