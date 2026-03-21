@@ -57,12 +57,6 @@ export default function LandingNavbar() {
             Order Now
           </button>
           <button
-            onClick={() => navigate('/login')}
-            className="hidden rounded-full border border-gold-400/40 px-4 sm:px-5 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-gold-300 transition hover:bg-gold-400/10 active:scale-95 sm:block"
-          >
-            Sign In
-          </button>
-          <button
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
             className="rounded-full p-1.5 sm:p-2 text-chocolate-200 transition-colors hover:bg-chocolate-800/60 hover:text-gold-400 active:scale-95 md:hidden"
@@ -118,12 +112,6 @@ export default function LandingNavbar() {
                   className="flex w-full items-center justify-center gap-2 rounded-lg bg-gold-400 px-4 py-3 text-sm font-semibold text-espresso transition-colors hover:bg-gold-300 active:scale-95"
                 >
                   Order Now
-                </button>
-                <button
-                  onClick={() => { setMobileOpen(false); navigate('/login'); }}
-                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-gold-400/40 px-4 py-3 text-sm font-semibold text-gold-300 transition-colors hover:bg-gold-400/10 active:scale-95"
-                >
-                  Sign In
                 </button>
               </div>
             </motion.aside>
