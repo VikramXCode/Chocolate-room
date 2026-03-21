@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Send, CheckCircle, ArrowUpDown } from 'lucide-react';
+import { Star, Send, CheckCircle, ArrowUpDown, ExternalLink } from 'lucide-react';
 
 import ReviewCard from '../../components/ReviewCard';
 import { useUserStore } from '../../state/userStore';
@@ -33,6 +33,9 @@ const sortOptions: { key: SortKey; label: string }[] = [
   { key: 'lowest', label: 'Lowest' },
 ];
 
+const GOOGLE_REVIEW_URL =
+  'https://www.google.com/search?sca_esv=1f1bc4ebf15b2244&sxsrf=ANbL-n54p9fc4BxKfYe4BFR4N1F_-u4d0A:1774112789163&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qObGkh-TbT_qTnQU1k5nVzbkJW_RIKqsuxsGPikny2zjB57GGzG6o0owydlnfl_7Jz65Y5L1UVj6QN-uhK0w3AvOgBPZs35sA4WkhY71v0AmEumsaVA%3D%3D&q=The+Chocolate+Room+-+Tirupur+Reviews&sa=X&ved=2ahUKEwieuduUvbGTAxVxSmwGHU7ELcEQ0bkNegQIJhAF&biw=1440&bih=813&dpr=2#lrd=0x3ba907424abbadb5:0xc352e7daa4a901ba,3,,,,';
+
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
@@ -53,6 +56,29 @@ function computeDistribution(reviews: Review[]): RatingDistribution[] {
 function averageRating(reviews: Review[]): number {
   if (!reviews.length) return 0;
   return reviews.reduce((s, r) => s + r.rating, 0) / reviews.length;
+}
+
+function hasPositiveWording(text: string): boolean {
+  const normalized = text.toLowerCase();
+  const positiveTerms = [
+    'good',
+    'great',
+    'excellent',
+    'amazing',
+    'awesome',
+    'love',
+    'loved',
+    'nice',
+    'best',
+    'tasty',
+    'delicious',
+    'friendly',
+    'fast',
+    'perfect',
+    'fantastic',
+  ];
+
+  return positiveTerms.some((term) => normalized.includes(term));
 }
 
 /* ================================================================== */
@@ -136,6 +162,7 @@ export default function ReviewsPage() {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formError, setFormError] = useState('');
+  const [showLowRatingPrompt, setShowLowRatingPrompt] = useState(false);
 
   /* keep name in sync if login changes */
   useEffect(() => {
@@ -159,12 +186,29 @@ export default function ReviewsPage() {
     async (e: React.FormEvent) => {
       e.preventDefault();
       setFormError('');
+
       if (!rating) {
         setFormError('Please select a star rating.');
         return;
       }
+
+      if (rating >= 3) {
+        window.location.assign(GOOGLE_REVIEW_URL);
+        return;
+      }
+
+      if (!name.trim()) {
+        setFormError('Please enter your name.');
+        return;
+      }
+
       if (!comment.trim()) {
-        setFormError('Please write a comment.');
+        setFormError('Please share the reason for your rating.');
+        return;
+      }
+
+      if (hasPositiveWording(comment) && rating < 3) {
+        setShowLowRatingPrompt(true);
         return;
       }
 
@@ -273,33 +317,45 @@ export default function ReviewsPage() {
               <InteractiveStars value={rating} onChange={setRating} />
             </div>
 
-            {/* Name */}
-            <div>
-              <label className="mb-1.5 block text-sm text-chocolate-300">
-                Name
-              </label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your name"
-                className="w-full rounded-lg border border-chocolate-700 bg-chocolate-800/60 px-4 py-2.5 text-sm text-cream outline-none transition-colors placeholder:text-chocolate-500 focus:border-gold-400/50"
-              />
-            </div>
+            {rating >= 3 && (
+              <div className="rounded-lg border border-gold-400/20 bg-gold-400/5 p-4">
+                <p className="text-sm text-chocolate-200">
+                  Thanks for your positive rating! Please continue to Google Reviews to post it publicly.
+                </p>
+              </div>
+            )}
 
-            {/* Comment */}
-            <div>
-              <label className="mb-1.5 block text-sm text-chocolate-300">
-                Comment
-              </label>
-              <textarea
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                rows={4}
-                placeholder="Share your experience…"
-                className="w-full resize-none rounded-lg border border-chocolate-700 bg-chocolate-800/60 px-4 py-2.5 text-sm text-cream outline-none transition-colors placeholder:text-chocolate-500 focus:border-gold-400/50"
-              />
-            </div>
+            {rating > 0 && rating < 3 && (
+              <>
+                {/* Name */}
+                <div>
+                  <label className="mb-1.5 block text-sm text-chocolate-300">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Your name"
+                    className="w-full rounded-lg border border-chocolate-700 bg-chocolate-800/60 px-4 py-2.5 text-sm text-cream outline-none transition-colors placeholder:text-chocolate-500 focus:border-gold-400/50"
+                  />
+                </div>
+
+                {/* Comment */}
+                <div>
+                  <label className="mb-1.5 block text-sm text-chocolate-300">
+                    Reason for your rating
+                  </label>
+                  <textarea
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    rows={4}
+                    placeholder="Tell us what went wrong and how we can improve…"
+                    className="w-full resize-none rounded-lg border border-chocolate-700 bg-chocolate-800/60 px-4 py-2.5 text-sm text-cream outline-none transition-colors placeholder:text-chocolate-500 focus:border-gold-400/50"
+                  />
+                </div>
+              </>
+            )}
 
             {/* Error */}
             <AnimatePresence>
@@ -337,13 +393,62 @@ export default function ReviewsPage() {
             >
               {submitting ? (
                 <span className="h-4 w-4 animate-spin rounded-full border-2 border-espresso border-t-transparent" />
+              ) : rating >= 3 ? (
+                <ExternalLink size={16} />
               ) : (
                 <Send size={16} />
               )}
-              {submitting ? 'Submitting…' : 'Submit Review'}
+              {submitting
+                ? 'Submitting…'
+                : rating >= 3
+                  ? 'Continue to Google Reviews'
+                  : 'Submit Feedback'}
             </button>
           </form>
         </motion.section>
+
+        <AnimatePresence>
+          {showLowRatingPrompt && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 px-4"
+            >
+              <motion.div
+                initial={{ scale: 0.96, opacity: 0, y: 6 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.96, opacity: 0, y: 6 }}
+                className="w-full max-w-md rounded-2xl border border-gold-400/20 bg-chocolate-950 p-5 shadow-2xl"
+              >
+                <h3 className="text-base font-semibold text-cream">Rating check</h3>
+                <p className="mt-2 text-sm text-chocolate-300">
+                  You mentioned positive feedback, but selected a low star rating. If you liked the experience, kindly consider changing your rating to 5 stars.
+                </p>
+                <div className="mt-5 flex gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowLowRatingPrompt(false)}
+                    className="flex-1 rounded-lg border border-chocolate-700 px-4 py-2 text-sm font-medium text-chocolate-200 hover:border-chocolate-500"
+                  >
+                    Keep my low rating
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setShowLowRatingPrompt(false);
+                      setRating(5);
+                      window.location.assign(GOOGLE_REVIEW_URL);
+                    }}
+                    className="flex-1 rounded-lg bg-gold-400 px-4 py-2 text-sm font-semibold text-espresso hover:bg-gold-300"
+                  >
+                    Change to 5 stars
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* ── Reviews List ────────────────────────────────────── */}
         <section>

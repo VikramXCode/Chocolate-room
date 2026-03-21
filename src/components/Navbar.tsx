@@ -295,19 +295,6 @@ export default function Navbar() {
           Menu
         </Link>
 
-        {/* Orders */}
-        <Link
-          to="/app/orders"
-          className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
-            location.pathname.startsWith('/app/orders')
-              ? 'text-gold-400'
-              : 'text-chocolate-400 hover:text-gold-400'
-          }`}
-        >
-          <ClipboardList className="h-5 w-5" />
-          Orders
-        </Link>
-
         {/* Cart */}
         <button
           onClick={openDrawer}
@@ -346,27 +333,20 @@ export default function Navbar() {
           Reviews
         </Link>
 
-        {/* Profile / Login */}
-        <Link
-          to={isLoggedIn ? '/app/profile' : '/login'}
-          className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
-            location.pathname === '/app/profile'
-              ? 'text-gold-400'
-              : 'text-chocolate-400 hover:text-gold-400'
-          }`}
-        >
-          {isLoggedIn ? (
-            <>
-              <User className="h-5 w-5" />
-              Profile
-            </>
-          ) : (
-            <>
-              <LogIn className="h-5 w-5" />
-              Login
-            </>
-          )}
-        </Link>
+        {/* Profile */}
+        {isLoggedIn && (
+          <Link
+            to="/app/profile"
+            className={`flex flex-1 flex-col items-center justify-center gap-1 py-2.5 text-[10px] font-medium transition-colors ${
+              location.pathname === '/app/profile'
+                ? 'text-gold-400'
+                : 'text-chocolate-400 hover:text-gold-400'
+            }`}
+          >
+            <User className="h-5 w-5" />
+            Profile
+          </Link>
+        )}
       </nav>
     </>
   );
