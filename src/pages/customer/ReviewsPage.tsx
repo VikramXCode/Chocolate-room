@@ -161,6 +161,7 @@ export default function ReviewsPage() {
   const [comment, setComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
   const [formError, setFormError] = useState('');
   const [showLowRatingPrompt, setShowLowRatingPrompt] = useState(false);
 
@@ -222,8 +223,17 @@ export default function ReviewsPage() {
         setReviews((prev) => [created, ...prev]);
         setRating(0);
         setComment('');
+        const customerLabel = (name.trim() || 'there').split(' ')[0];
+        setSuccessMessage(
+          rating < 3
+            ? `We’re really sorry, ${customerLabel}. Thank you for the honest feedback — we’ll do better.`
+            : 'Review submitted successfully!',
+        );
         setSuccess(true);
-        setTimeout(() => setSuccess(false), 3000);
+        setTimeout(() => {
+          setSuccess(false);
+          setSuccessMessage('');
+        }, 3500);
       } catch {
         setFormError('Something went wrong. Please try again.');
       } finally {
@@ -381,7 +391,7 @@ export default function ReviewsPage() {
                   className="flex items-center gap-2 text-sm text-green-400"
                 >
                   <CheckCircle size={16} />
-                  Review submitted successfully!
+                  {successMessage || 'Review submitted successfully!'}
                 </motion.div>
               )}
             </AnimatePresence>
