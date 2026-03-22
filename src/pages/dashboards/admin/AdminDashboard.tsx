@@ -20,7 +20,18 @@ export default function AdminDashboard() {
     .sort((a, b) => b.value - a.value);
   const maxCategoryRevenue = categoryRevenueData[0]?.value ?? 1;
 
-  const popularItems = menuItems.filter((m) => m.popular);
+  const soldQuantityByItem = orders
+    .filter((order) => order.status !== 'cancelled')
+    .reduce<Record<string, number>>((acc, order) => {
+      order.items.forEach((orderItem) => {
+        acc[orderItem.menuItemId] = (acc[orderItem.menuItemId] || 0) + orderItem.quantity;
+      });
+      return acc;
+    }, {});
+
+  const popularItems = menuItems
+    .filter((m) => m.popular)
+    .sort((a, b) => (soldQuantityByItem[b.id] || 0) - (soldQuantityByItem[a.id] || 0));
 
   const stats = [
     { label: 'Orders Today', value: todayOrders.length, icon: <ShoppingBag size={22} />, iconColor: 'text-gold-400' },
@@ -99,7 +110,12 @@ export default function AdminDashboard() {
               <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover ring-1 ring-chocolate-800/50" />
               <div className="min-w-0">
                 <p className="text-sm font-medium text-chocolate-100 truncate">{item.name}</p>
-                <p className="text-xs text-gold-400 font-bold mt-0.5">₹{item.price}</p>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <p className="text-xs text-gold-400 font-bold">₹{item.price}</p>
+                  <span className="text-[10px] font-semibold text-emerald-300 bg-emerald-500/10 px-1.5 py-0.5 rounded-full">
+                    Sold: {soldQuantityByItem[item.id] || 0}
+                  </span>
+                </div>
               </div>
             </motion.div>
           ))}
