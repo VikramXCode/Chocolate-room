@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { ShoppingBag, DollarSign, TrendingUp, Table2 } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useAppData } from '../../../context/AppDataContext';
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
-const CHART_COLORS = ['#D4AF37', '#B8960C', '#8B4513', '#6B3410', '#c08050', '#d4a574'];
 
 const chartTooltipStyle = {
   background: '#221105',
@@ -25,13 +24,7 @@ export default function AdminDashboard() {
     acc[item.category] = (acc[item.category] || 0) + item.price;
     return acc;
   }, {});
-  const barData = Object.entries(categoryData).map(([name, value]) => ({ name: name.slice(0, 12), value }));
-
-  const statusCounts = orders.reduce<Record<string, number>>((acc, o) => {
-    acc[o.status] = (acc[o.status] || 0) + 1;
-    return acc;
-  }, {});
-  const pieData = Object.entries(statusCounts).map(([name, value]) => ({ name, value }));
+  const barData = Object.entries(categoryData).map(([name, value]) => ({ name, value }));
 
   const popularItems = menuItems.filter((m) => m.popular);
 
@@ -69,30 +62,25 @@ export default function AdminDashboard() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+      <div className="mb-8">
         <motion.div {...fadeUp} transition={{ delay: 0.2, duration: 0.5 }} className="glass rounded-2xl p-5 hover:border-gold-400/15 transition-all duration-500">
           <h3 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest mb-5">Revenue by Category</h3>
-          <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={barData}>
-              <XAxis dataKey="name" tick={{ fill: '#8B4513', fontSize: 11 }} axisLine={false} tickLine={false} />
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={barData} margin={{ top: 8, right: 10, left: 0, bottom: 80 }}>
+              <XAxis
+                dataKey="name"
+                interval={0}
+                angle={-90}
+                textAnchor="end"
+                height={90}
+                tick={{ fill: '#8B4513', fontSize: 11 }}
+                axisLine={false}
+                tickLine={false}
+              />
               <YAxis tick={{ fill: '#8B4513', fontSize: 11 }} axisLine={false} tickLine={false} />
               <Tooltip contentStyle={chartTooltipStyle} />
               <Bar dataKey="value" fill="#D4AF37" radius={[6, 6, 0, 0]} />
             </BarChart>
-          </ResponsiveContainer>
-        </motion.div>
-
-        <motion.div {...fadeUp} transition={{ delay: 0.3, duration: 0.5 }} className="glass rounded-2xl p-5 hover:border-gold-400/15 transition-all duration-500">
-          <h3 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest mb-5">Order Status</h3>
-          <ResponsiveContainer width="100%" height={250}>
-            <PieChart>
-              <Pie data={pieData} cx="50%" cy="50%" innerRadius={60} outerRadius={90} dataKey="value" nameKey="name" label={({ name, value }) => `${name}: ${value}`}>
-                {pieData.map((_, i) => (
-                  <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip contentStyle={chartTooltipStyle} />
-            </PieChart>
           </ResponsiveContainer>
         </motion.div>
       </div>

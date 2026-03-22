@@ -19,7 +19,6 @@ export interface MenuItem {
   popular?: boolean;
   veg: boolean;
   prepTimeMinutes?: number;
-  prepTimeMinutes?: number;
 }
 
 export interface CartItem {
