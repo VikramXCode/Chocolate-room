@@ -54,20 +54,22 @@ export default function AdminProducts() {
   return (
     <div>
       {/* Page header */}
-      <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="flex items-center justify-between mb-8">
-        <div>
+      <motion.div {...fadeUp} transition={{ duration: 0.5 }} className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between mb-8">
+        <div className="min-w-0">
           <h2 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest">Catalogue</h2>
-          <div className="flex items-center gap-3 mt-1">
-            <p className="text-2xl font-display text-chocolate-100">Product Management</p>
-            <span className="text-[11px] font-semibold text-gold-400 bg-gold-400/10 px-2.5 py-0.5 rounded-full">{menuItems.length} items</span>
+          <div className="mt-1 flex flex-wrap items-center gap-2 sm:gap-3">
+            <p className="text-xl sm:text-2xl font-display text-chocolate-100">Product Management</p>
+            <span className="inline-flex items-center rounded-full bg-gold-400/10 px-2.5 py-1 text-xs font-semibold text-gold-300 ring-1 ring-gold-400/20 whitespace-nowrap">
+              Total Items: {menuItems.length}
+            </span>
           </div>
           <div className="w-12 h-0.5 bg-gradient-to-r from-gold-400/80 to-transparent mt-3" />
         </div>
         <button
           onClick={() => handleOpen()}
-          className="bg-gold-400 text-chocolate-950 px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2 hover:bg-gold-300 active:scale-[0.97] transition-all duration-300"
+          className="self-start sm:self-auto bg-gold-400 text-chocolate-950 px-3.5 py-1.5 rounded-lg text-xs sm:text-sm font-semibold inline-flex items-center gap-1.5 hover:bg-gold-300 active:scale-[0.97] transition-all duration-300"
         >
-          <Plus size={16} /> Add Product
+          <Plus size={14} /> Add Product
         </button>
       </motion.div>
 
