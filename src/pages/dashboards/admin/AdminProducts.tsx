@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit3, Trash2, X, Upload } from 'lucide-react';
 import { useAppData } from '../../../context/AppDataContext';
@@ -19,6 +19,12 @@ export default function AdminProducts() {
   const [showForm, setShowForm] = useState(false);
   const [editId, setEditId] = useState<string | null>(null);
   const [form, setForm] = useState<Omit<MenuItem, 'id'>>(emptyProduct);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<MenuCategory | 'All'>('All');
+  const [availabilityFilter, setAvailabilityFilter] = useState<'all' | 'available' | 'unavailable'>('all');
+  const [sortBy, setSortBy] = useState<'name-asc' | 'name-desc' | 'price-asc' | 'price-desc'>('name-asc');
+  const [pageSize, setPageSize] = useState(12);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const handleOpen = (item?: MenuItem) => {
     if (item) {
@@ -51,10 +57,39 @@ export default function AdminProducts() {
     setMenuItems((prev) => prev.map((m) => m.id === id ? { ...m, available: !m.available } : m));
   };
 
+  const filteredAndSortedItems = useMemo(() => {
+    const query = searchTerm.trim().toLowerCase();
+    const filteredItems = menuItems.filter((item) => {
+      const matchesSearch = !query || item.name.toLowerCase().includes(query) || item.description.toLowerCase().includes(query);
+      const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
+      const matchesAvailability = availabilityFilter === 'all' || (availabilityFilter === 'available' ? item.available : !item.available);
+      return matchesSearch && matchesCategory && matchesAvailability;
+    });
+
+    return [...filteredItems].sort((a, b) => {
+      if (sortBy === 'name-asc') return a.name.localeCompare(b.name);
+      if (sortBy === 'name-desc') return b.name.localeCompare(a.name);
+      if (sortBy === 'price-asc') return a.price - b.price;
+      return b.price - a.price;
+    });
+  }, [menuItems, searchTerm, selectedCategory, availabilityFilter, sortBy]);
+
+  const totalPages = Math.max(1, Math.ceil(filteredAndSortedItems.length / pageSize));
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = Math.min(startIndex + pageSize, filteredAndSortedItems.length);
+  const paginatedItems = filteredAndSortedItems.slice(startIndex, endIndex);
+
   const categorySections = categories
     .map((category) => ({
       category,
-      items: menuItems.filter((item) => item.category === category),
+      items: paginatedItems.filter((item) => item.category === category),
     }))
     .filter((section) => section.items.length > 0);
 
@@ -78,6 +113,85 @@ export default function AdminProducts() {
         >
           <Plus size={14} /> Add Product
         </button>
+      </motion.div>
+
+      <motion.div
+        {...fadeUp}
+        transition={{ delay: 0.08, duration: 0.45 }}
+        className="glass rounded-2xl p-4 mb-6 border border-chocolate-800/50"
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1);
+            }}
+            placeholder="Search name or description"
+            className={inputClass}
+          />
+
+          <select
+            value={selectedCategory}
+            onChange={(e) => {
+              setSelectedCategory(e.target.value as MenuCategory | 'All');
+              setCurrentPage(1);
+            }}
+            className={inputClass}
+          >
+            <option value="All">All Categories</option>
+            {categories.map((category) => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+
+          <select
+            value={availabilityFilter}
+            onChange={(e) => {
+              setAvailabilityFilter(e.target.value as 'all' | 'available' | 'unavailable');
+              setCurrentPage(1);
+            }}
+            className={inputClass}
+          >
+            <option value="all">All Availability</option>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+          </select>
+
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value as 'name-asc' | 'name-desc' | 'price-asc' | 'price-desc')}
+            className={inputClass}
+          >
+            <option value="name-asc">Name A → Z</option>
+            <option value="name-desc">Name Z → A</option>
+            <option value="price-asc">Price Low → High</option>
+            <option value="price-desc">Price High → Low</option>
+          </select>
+
+          <select
+            value={pageSize}
+            onChange={(e) => {
+              setPageSize(Number(e.target.value));
+              setCurrentPage(1);
+            }}
+            className={inputClass}
+          >
+            <option value={12}>12 per page</option>
+            <option value={24}>24 per page</option>
+            <option value={36}>36 per page</option>
+          </select>
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-chocolate-400">
+          <p>
+            Showing {filteredAndSortedItems.length === 0 ? 0 : startIndex + 1}-{endIndex} of {filteredAndSortedItems.length} products
+          </p>
+          <p>
+            Page {currentPage} of {totalPages}
+          </p>
+        </div>
       </motion.div>
 
       {/* Products grouped by category */}
@@ -146,6 +260,34 @@ export default function AdminProducts() {
           </motion.div>
         ))}
       </div>
+
+      {filteredAndSortedItems.length === 0 && (
+        <div className="glass rounded-2xl p-6 text-center text-sm text-chocolate-400 border border-chocolate-800/50">
+          No products found for the selected filters.
+        </div>
+      )}
+
+      {filteredAndSortedItems.length > 0 && (
+        <div className="mt-6 flex items-center justify-between gap-3">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+            disabled={currentPage === 1}
+            className="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-chocolate-900/60 text-chocolate-200 ring-1 ring-chocolate-800/60 disabled:opacity-40 disabled:cursor-not-allowed hover:ring-gold-400/20 transition-all duration-300"
+          >
+            Previous
+          </button>
+
+          <div className="text-xs text-chocolate-400">Page {currentPage} / {totalPages}</div>
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold bg-chocolate-900/60 text-chocolate-200 ring-1 ring-chocolate-800/60 disabled:opacity-40 disabled:cursor-not-allowed hover:ring-gold-400/20 transition-all duration-300"
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       {/* Form modal */}
       <AnimatePresence>
