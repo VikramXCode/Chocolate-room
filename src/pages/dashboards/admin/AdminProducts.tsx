@@ -11,7 +11,7 @@ const categories: MenuCategory[] = ['Hot Chocolate', 'Cold Beverages', 'Shakes',
 const inputClass = 'w-full px-3 py-2.5 rounded-xl bg-chocolate-900/60 border border-chocolate-800/50 text-chocolate-100 text-sm focus:outline-none focus:border-gold-400/30 transition-colors duration-300';
 
 const emptyProduct: Omit<MenuItem, 'id'> = {
-  name: '', description: '', price: 0, category: 'Hot Chocolate', image: '', available: true, veg: true,
+  name: '', description: '', price: 0, category: 'Hot Chocolate', image: '', available: true, veg: true, prepTimeMinutes: 10,
 };
 
 export default function AdminProducts() {
@@ -23,7 +23,7 @@ export default function AdminProducts() {
   const handleOpen = (item?: MenuItem) => {
     if (item) {
       setEditId(item.id);
-      setForm({ name: item.name, description: item.description, price: item.price, category: item.category, image: item.image, available: item.available, veg: item.veg, popular: item.popular });
+      setForm({ name: item.name, description: item.description, price: item.price, category: item.category, image: item.image, available: item.available, veg: item.veg, popular: item.popular, prepTimeMinutes: item.prepTimeMinutes });
     } else {
       setEditId(null);
       setForm(emptyProduct);
@@ -154,9 +154,15 @@ export default function AdminProducts() {
                       </select>
                     </div>
                   </div>
-                  <div>
-                    <label className="text-[11px] text-chocolate-500 uppercase tracking-wider mb-1.5 flex items-center gap-1"><Upload size={11} /> Image URL</label>
-                    <input type="text" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} placeholder="https://..." className={inputClass} />
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-[11px] text-chocolate-500 uppercase tracking-wider mb-1.5 block">Prep Time (mins)</label>
+                      <input type="number" value={form.prepTimeMinutes || ''} onChange={(e) => setForm({ ...form, prepTimeMinutes: Number(e.target.value) })} className={inputClass} placeholder="15" />
+                    </div>
+                    <div>
+                      <label className="text-[11px] text-chocolate-500 uppercase tracking-wider mb-1.5 flex items-center gap-1"><Upload size={11} /> Image URL</label>
+                      <input type="text" value={form.image} onChange={(e) => setForm({ ...form, image: e.target.value })} placeholder="https://..." className={inputClass} />
+                    </div>
                   </div>
                   <div className="flex gap-5">
                     <label className="flex items-center gap-2 text-sm text-chocolate-300 cursor-pointer">

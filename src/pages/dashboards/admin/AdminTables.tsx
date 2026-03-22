@@ -88,7 +88,7 @@ export default function AdminTables() {
       </AnimatePresence>
 
       {/* Table grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 min-[400px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {tables.map((table, i) => (
           <motion.div
             key={table.id}
