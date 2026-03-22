@@ -51,6 +51,13 @@ export default function AdminProducts() {
     setMenuItems((prev) => prev.map((m) => m.id === id ? { ...m, available: !m.available } : m));
   };
 
+  const categorySections = categories
+    .map((category) => ({
+      category,
+      items: menuItems.filter((item) => item.category === category),
+    }))
+    .filter((section) => section.items.length > 0);
+
   return (
     <div>
       {/* Page header */}
@@ -73,49 +80,68 @@ export default function AdminProducts() {
         </button>
       </motion.div>
 
-      {/* Products grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        {menuItems.map((item, i) => (
+      {/* Products grouped by category */}
+      <div className="space-y-8">
+        {categorySections.map((section, sectionIndex) => (
           <motion.div
-            key={item.id}
+            key={section.category}
             initial={fadeUp.initial}
             animate={fadeUp.animate}
-            transition={{ delay: i * 0.03, duration: 0.4 }}
-            className="group glass rounded-2xl p-4 ring-1 ring-chocolate-800/50 hover:ring-gold-400/20 hover:border-gold-400/15 transition-all duration-500"
+            transition={{ delay: sectionIndex * 0.04, duration: 0.4 }}
+            className="space-y-4"
           >
-            <div className="flex gap-3">
-              <img src={item.image} alt={item.name} className="w-20 h-20 rounded-xl object-cover flex-shrink-0 ring-1 ring-chocolate-800/50" />
-              <div className="flex-1 min-w-0">
-                <p className="font-semibold text-sm text-chocolate-100 truncate">{item.name}</p>
-                <p className="text-[11px] text-chocolate-500 mt-0.5">{item.category}</p>
-                <p className="text-gold-400 font-bold text-sm mt-1.5">₹{item.price}</p>
-              </div>
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm sm:text-base font-semibold text-chocolate-200">{section.category}</h3>
+              <span className="text-[11px] font-semibold text-chocolate-400 bg-chocolate-900/60 ring-1 ring-chocolate-800/60 px-2.5 py-1 rounded-full whitespace-nowrap">
+                {section.items.length} items
+              </span>
             </div>
-            <div className="flex items-center justify-between mt-3 pt-3 border-t border-chocolate-800/40">
-              <button
-                onClick={() => toggleAvailability(item.id)}
-                className={`text-[11px] px-3 py-1.5 rounded-lg font-semibold active:scale-[0.97] transition-all duration-300 ${
-                  item.available
-                    ? 'bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20'
-                    : 'bg-red-500/10 text-red-400 ring-1 ring-red-500/20'
-                }`}
-              >
-                {item.available ? 'Available' : 'Unavailable'}
-              </button>
-              <div className="flex gap-1.5">
-                <button
-                  onClick={() => handleOpen(item)}
-                  className="p-2 rounded-xl bg-chocolate-900/60 text-chocolate-400 hover:text-gold-400 ring-1 ring-chocolate-800/40 hover:ring-gold-400/20 active:scale-[0.97] transition-all duration-300"
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+              {section.items.map((item, itemIndex) => (
+                <motion.div
+                  key={item.id}
+                  initial={fadeUp.initial}
+                  animate={fadeUp.animate}
+                  transition={{ delay: itemIndex * 0.03, duration: 0.35 }}
+                  className="group glass rounded-2xl p-4 ring-1 ring-chocolate-800/50 hover:ring-gold-400/20 hover:border-gold-400/15 transition-all duration-500"
                 >
-                  <Edit3 size={14} />
-                </button>
-                <button
-                  onClick={() => handleDelete(item.id)}
-                  className="p-2 rounded-xl bg-chocolate-900/60 text-chocolate-400 hover:text-red-400 ring-1 ring-chocolate-800/40 hover:ring-red-400/20 active:scale-[0.97] transition-all duration-300"
-                >
-                  <Trash2 size={14} />
-                </button>
-              </div>
+                  <div className="flex gap-3">
+                    <img src={item.image} alt={item.name} className="w-20 h-20 rounded-xl object-cover flex-shrink-0 ring-1 ring-chocolate-800/50" />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-semibold text-sm text-chocolate-100 truncate">{item.name}</p>
+                      <p className="text-[11px] text-chocolate-500 mt-0.5">{item.category}</p>
+                      <p className="text-gold-400 font-bold text-sm mt-1.5">₹{item.price}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between mt-3 pt-3 border-t border-chocolate-800/40">
+                    <button
+                      onClick={() => toggleAvailability(item.id)}
+                      className={`text-[11px] px-3 py-1.5 rounded-lg font-semibold active:scale-[0.97] transition-all duration-300 ${
+                        item.available
+                          ? 'bg-emerald-500/10 text-emerald-400 ring-1 ring-emerald-500/20'
+                          : 'bg-red-500/10 text-red-400 ring-1 ring-red-500/20'
+                      }`}
+                    >
+                      {item.available ? 'Available' : 'Unavailable'}
+                    </button>
+                    <div className="flex gap-1.5">
+                      <button
+                        onClick={() => handleOpen(item)}
+                        className="p-2 rounded-xl bg-chocolate-900/60 text-chocolate-400 hover:text-gold-400 ring-1 ring-chocolate-800/40 hover:ring-gold-400/20 active:scale-[0.97] transition-all duration-300"
+                      >
+                        <Edit3 size={14} />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(item.id)}
+                        className="p-2 rounded-xl bg-chocolate-900/60 text-chocolate-400 hover:text-red-400 ring-1 ring-chocolate-800/40 hover:ring-red-400/20 active:scale-[0.97] transition-all duration-300"
+                      >
+                        <Trash2 size={14} />
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         ))}
