@@ -11,75 +11,75 @@ export const mockUsers: User[] = [
 export const mockMenuItems: MenuItem[] = [
   {
     id: 'm1', name: 'Belgian Dark Hot Chocolate', description: 'Rich 72% dark Belgian cocoa blended with steamed milk and topped with whipped cream',
-    price: 249, category: 'Hot Chocolate', image: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400', available: true, popular: true, veg: true,
+    price: 249, category: 'Hot Chocolate', image: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm2', name: 'Classic Swiss Hot Chocolate', description: 'Traditional Swiss-style hot chocolate with premium cocoa and a hint of vanilla',
-    price: 199, category: 'Hot Chocolate', image: 'https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400', available: true, veg: true,
+    price: 199, category: 'Hot Chocolate', image: 'https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm3', name: 'Hazelnut Hot Chocolate', description: 'Creamy hot chocolate infused with roasted hazelnut syrup and cocoa nibs',
-    price: 279, category: 'Hot Chocolate', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400', available: true, veg: true,
+    price: 279, category: 'Hot Chocolate', image: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm4', name: 'Iced Mocha Frappe', description: 'Espresso blended with chocolate sauce, cold milk, and ice, finished with whipped cream',
-    price: 299, category: 'Cold Beverages', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', available: true, popular: true, veg: true,
+    price: 299, category: 'Cold Beverages', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm5', name: 'Cold Coffee Chocolate', description: 'Refreshing cold brew coffee mixed with chocolate and served over ice',
-    price: 229, category: 'Cold Beverages', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400', available: true, veg: true,
+    price: 229, category: 'Cold Beverages', image: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm6', name: 'Mint Chocolate Shake', description: 'Cool peppermint blended with rich chocolate ice cream and milk',
-    price: 269, category: 'Shakes', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400', available: true, veg: true,
+    price: 269, category: 'Shakes', image: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm7', name: 'Oreo Chocolate Shake', description: 'Crushed Oreo cookies blended with chocolate ice cream and topped with cream',
-    price: 289, category: 'Shakes', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400', available: true, popular: true, veg: true,
+    price: 289, category: 'Shakes', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm8', name: 'Death by Chocolate Cake', description: 'Layered dark chocolate cake with ganache, truffle filling, and chocolate shavings',
-    price: 349, category: 'Cakes', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400', available: true, popular: true, veg: true,
+    price: 349, category: 'Cakes', image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm9', name: 'Red Velvet Pastry', description: 'Classic red velvet with cream cheese frosting and dark chocolate drizzle',
-    price: 199, category: 'Cakes', image: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?w=400', available: true, veg: true,
+    price: 199, category: 'Cakes', image: 'https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm10', name: 'Chocolate Lava Cake', description: 'Warm chocolate cake with a molten chocolate center, served with vanilla ice cream',
-    price: 329, category: 'Desserts', image: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', available: true, popular: true, veg: true,
+    price: 329, category: 'Desserts', image: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm11', name: 'Tiramisu', description: 'Italian classic with espresso-soaked ladyfingers, mascarpone cream, and cocoa',
-    price: 299, category: 'Desserts', image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400', available: true, veg: true,
+    price: 299, category: 'Desserts', image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm12', name: 'Chocolate Brownie Sundae', description: 'Warm fudge brownie topped with chocolate and vanilla ice cream, hot fudge, and nuts',
-    price: 279, category: 'Desserts', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', available: false, veg: true,
+    price: 279, category: 'Desserts', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400', available: false, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm13', name: 'Belgian Chocolate Waffle', description: 'Crispy golden waffle drizzled with Belgian chocolate sauce and fresh strawberries',
-    price: 259, category: 'Waffles', image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400', available: true, popular: true, veg: true,
+    price: 259, category: 'Waffles', image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm14', name: 'Nutella Banana Waffle', description: 'Warm waffle loaded with Nutella spread, sliced bananas, and chocolate chips',
-    price: 289, category: 'Waffles', image: 'https://images.unsplash.com/photo-1598214886806-c87b84b7078b?w=400', available: true, veg: true,
+    price: 289, category: 'Waffles', image: 'https://images.unsplash.com/photo-1598214886806-c87b84b7078b?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm15', name: 'Chocolate Panini', description: 'Grilled panini filled with dark chocolate, cheese, and caramelised nuts',
-    price: 219, category: 'Snacks', image: 'https://images.unsplash.com/photo-1528736235302-52922df5c122?w=400', available: true, veg: true,
+    price: 219, category: 'Snacks', image: 'https://images.unsplash.com/photo-1528736235302-52922df5c122?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm16', name: 'Churros with Chocolate Dip', description: 'Crispy cinnamon-sugar churros served with warm Belgian chocolate dipping sauce',
-    price: 199, category: 'Snacks', image: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', available: true, veg: true,
+    price: 199, category: 'Snacks', image: 'https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm17', name: "Chef's Special Fondue", description: 'Premium chocolate fondue with assorted fruits, marshmallows, and cookies for dipping',
-    price: 599, category: 'Specials', image: 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400', available: true, popular: true, veg: true,
+    price: 599, category: 'Specials', image: 'https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400', available: true, popular: true, veg: true, prepTimeMinutes: 10,
   },
   {
     id: 'm18', name: 'Truffle Collection Box', description: 'Handcrafted box of 12 assorted chocolate truffles — dark, milk, and white',
-    price: 499, category: 'Specials', image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400', available: true, veg: true,
+    price: 499, category: 'Specials', image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400', available: true, veg: true, prepTimeMinutes: 10,
   },
 ];
 

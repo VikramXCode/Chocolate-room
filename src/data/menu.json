@@ -8,7 +8,7 @@
     "image": "https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m2",
@@ -18,7 +18,7 @@
     "category": "Hot Chocolate",
     "image": "https://images.unsplash.com/photo-1517578239113-b03992dcdd25?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m3",
@@ -28,7 +28,7 @@
     "category": "Hot Chocolate",
     "image": "https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m4",
@@ -39,7 +39,7 @@
     "image": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m5",
@@ -49,7 +49,7 @@
     "category": "Cold Beverages",
     "image": "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m6",
@@ -59,7 +59,7 @@
     "category": "Shakes",
     "image": "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m7",
@@ -70,7 +70,7 @@
     "image": "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m8",
@@ -81,7 +81,7 @@
     "image": "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m9",
@@ -91,7 +91,7 @@
     "category": "Cakes",
     "image": "https://images.unsplash.com/photo-1616541823729-00fe0aacd32c?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m10",
@@ -102,7 +102,7 @@
     "image": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m11",
@@ -112,7 +112,7 @@
     "category": "Desserts",
     "image": "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m12",
@@ -122,7 +122,7 @@
     "category": "Desserts",
     "image": "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400",
     "available": false,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m13",
@@ -133,7 +133,7 @@
     "image": "https://images.unsplash.com/photo-1562376552-0d160a2f238d?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m14",
@@ -143,7 +143,7 @@
     "category": "Waffles",
     "image": "https://images.unsplash.com/photo-1598214886806-c87b84b7078b?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m15",
@@ -153,7 +153,7 @@
     "category": "Snacks",
     "image": "https://images.unsplash.com/photo-1528736235302-52922df5c122?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m16",
@@ -163,7 +163,7 @@
     "category": "Snacks",
     "image": "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m17",
@@ -174,7 +174,7 @@
     "image": "https://images.unsplash.com/photo-1530610476181-d83430b64dcd?w=400",
     "available": true,
     "popular": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   },
   {
     "id": "m18",
@@ -184,6 +184,6 @@
     "category": "Specials",
     "image": "https://images.unsplash.com/photo-1549007994-cb92caebd54b?w=400",
     "available": true,
-    "veg": true
+    "veg": true, "prepTimeMinutes": 10
   }
 ]

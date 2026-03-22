@@ -18,6 +18,8 @@ export interface MenuItem {
   available: boolean;
   popular?: boolean;
   veg: boolean;
+  prepTimeMinutes?: number;
+  prepTimeMinutes?: number;
 }
 
 export type MenuCategory =

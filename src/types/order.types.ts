@@ -16,6 +16,7 @@ export interface OrderItem {
   name: string;
   quantity: number;
   price: number;
+  prepTimeMinutes?: number;
 }
 
 export interface Order {
@@ -32,4 +33,6 @@ export interface Order {
   createdAt: string;
   waiterId?: string;
   estimatedTime?: number; // minutes
+  targetReadyTime?: string; // ISO date string of target goal ETA
+  prepStartedAt?: string; // Time when order transitioned to 'preparing'
 }
