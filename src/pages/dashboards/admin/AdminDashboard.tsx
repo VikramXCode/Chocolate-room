@@ -1,17 +1,8 @@
 import { motion } from 'framer-motion';
 import { ShoppingBag, DollarSign, TrendingUp, Table2 } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useAppData } from '../../../context/AppDataContext';
 
 const fadeUp = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } };
-
-const chartTooltipStyle = {
-  background: '#221105',
-  border: '1px solid rgba(212,175,55,0.1)',
-  borderRadius: '12px',
-  color: '#f0e4d4',
-  fontSize: '12px',
-};
 
 export default function AdminDashboard() {
   const { orders, menuItems, tables } = useAppData();
@@ -24,7 +15,10 @@ export default function AdminDashboard() {
     acc[item.category] = (acc[item.category] || 0) + item.price;
     return acc;
   }, {});
-  const barData = Object.entries(categoryData).map(([name, value]) => ({ name, value }));
+  const categoryRevenueData = Object.entries(categoryData)
+    .map(([name, value]) => ({ name, value }))
+    .sort((a, b) => b.value - a.value);
+  const maxCategoryRevenue = categoryRevenueData[0]?.value ?? 1;
 
   const popularItems = menuItems.filter((m) => m.popular);
 
@@ -65,25 +59,28 @@ export default function AdminDashboard() {
       <div className="mb-8">
         <motion.div {...fadeUp} transition={{ delay: 0.2, duration: 0.5 }} className="glass rounded-2xl p-5 hover:border-gold-400/15 transition-all duration-500">
           <h3 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest mb-5">Revenue by Category</h3>
-          <ResponsiveContainer width="100%" height={340}>
-            <BarChart data={barData} margin={{ top: 8, right: 10, left: 0, bottom: 120 }}>
-              <XAxis
-                dataKey="name"
-                interval={0}
-                angle={-90}
-                textAnchor="start"
-                dy={10}
-                tickMargin={8}
-                height={120}
-                tick={{ fill: '#8B4513', fontSize: 11 }}
-                axisLine={false}
-                tickLine={false}
-              />
-              <YAxis tick={{ fill: '#8B4513', fontSize: 11 }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={chartTooltipStyle} />
-              <Bar dataKey="value" fill="#D4AF37" radius={[6, 6, 0, 0]} />
-            </BarChart>
-          </ResponsiveContainer>
+          <div className="space-y-3">
+            {categoryRevenueData.map((item, index) => {
+              const widthPercent = Math.max(12, Math.round((item.value / maxCategoryRevenue) * 100));
+
+              return (
+                <div key={item.name} className="rounded-xl bg-chocolate-900/35 ring-1 ring-chocolate-800/50 p-3">
+                  <div className="flex items-center justify-between gap-3 mb-2">
+                    <p className="text-sm text-chocolate-100 font-medium break-words">{index + 1}. {item.name}</p>
+                    <p className="text-xs text-gold-400 font-semibold whitespace-nowrap">₹{item.value.toLocaleString()}</p>
+                  </div>
+                  <div className="h-2.5 rounded-full bg-chocolate-950/80 overflow-hidden">
+                    <motion.div
+                      initial={{ width: 0 }}
+                      animate={{ width: `${widthPercent}%` }}
+                      transition={{ duration: 0.45, delay: 0.06 * index }}
+                      className="h-full rounded-full bg-gradient-to-r from-gold-500 to-gold-300"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </motion.div>
       </div>
 
