@@ -65,14 +65,16 @@ export default function AdminDashboard() {
       <div className="mb-8">
         <motion.div {...fadeUp} transition={{ delay: 0.2, duration: 0.5 }} className="glass rounded-2xl p-5 hover:border-gold-400/15 transition-all duration-500">
           <h3 className="text-sm font-semibold text-chocolate-400 uppercase tracking-widest mb-5">Revenue by Category</h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={barData} margin={{ top: 8, right: 10, left: 0, bottom: 80 }}>
+          <ResponsiveContainer width="100%" height={340}>
+            <BarChart data={barData} margin={{ top: 8, right: 10, left: 0, bottom: 120 }}>
               <XAxis
                 dataKey="name"
                 interval={0}
                 angle={-90}
-                textAnchor="end"
-                height={90}
+                textAnchor="start"
+                dy={10}
+                tickMargin={8}
+                height={120}
                 tick={{ fill: '#8B4513', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
